@@ -8,19 +8,25 @@ import PeonyPage from './pages/PeonyPage';
 import CanvasBackgroundEffects from './components/Effects/CanvasBackgroundEffects';
 
 // Memory images from public/memories/
+// Helper to handle base path for GitHub Pages
+const resolvePath = (path: string) => {
+  return import.meta.env.BASE_URL + path.replace(/^\//, '');
+};
+
+// Memory images from public/memories/
 const memoryImages: string[] = [
-  '/memories/IMG_4891.JPG',
-  '/memories/IMG_4909.JPG',
-  '/memories/IMG_4913.JPG',
-  '/memories/IMG_5006.JPG',
-  '/memories/IMG_6280.JPG',
-  '/memories/IMG_7321.JPG',
-  '/memories/IMG_7411.jpg',
-  '/memories/a861063c-5a40-4df8-acaf-398ef7aa81a7.JPG',
-  '/memories/b8b07275-1668-431c-92da-d582c940a0c7.JPG',
-  '/memories/e0618077-191d-4805-b0b2-eeb0b1ca263e.JPG',
-  '/memories/e5a59266-912f-4ecf-8ac0-1b8abdcf200c.JPG',
-  '/memories/fc90b5e2-bc5b-4ae2-98f4-c14950b61788.JPG',
+  resolvePath('/memories/IMG_4891.JPG'),
+  resolvePath('/memories/IMG_4909.JPG'),
+  resolvePath('/memories/IMG_4913.JPG'),
+  resolvePath('/memories/IMG_5006.JPG'),
+  resolvePath('/memories/IMG_6280.JPG'),
+  resolvePath('/memories/IMG_7321.JPG'),
+  resolvePath('/memories/IMG_7411.jpg'),
+  resolvePath('/memories/a861063c-5a40-4df8-acaf-398ef7aa81a7.JPG'),
+  resolvePath('/memories/b8b07275-1668-431c-92da-d582c940a0c7.JPG'),
+  resolvePath('/memories/e0618077-191d-4805-b0b2-eeb0b1ca263e.JPG'),
+  resolvePath('/memories/e5a59266-912f-4ecf-8ac0-1b8abdcf200c.JPG'),
+  resolvePath('/memories/fc90b5e2-bc5b-4ae2-98f4-c14950b61788.JPG'),
 ];
 
 const TOTAL_PAGES = 5;
@@ -32,8 +38,8 @@ const pageVariants = {
 };
 
 const songs = [
-  { src: '/song.mp3', cover: '/song.jpg' },
-  { src: '/Les.mp3', cover: '/les.jpeg' }
+  { src: resolvePath('/song.mp3'), cover: resolvePath('/song.jpg') },
+  { src: resolvePath('/Les.mp3'), cover: resolvePath('/les.jpeg') }
 ];
 
 function App() {

@@ -13,46 +13,50 @@ interface PhotosPageProps {
   onPrev: () => void;
 }
 
+const resolvePath = (path: string) => {
+  return import.meta.env.BASE_URL + path.replace(/^\//, '');
+};
+
 const PhotosPage = ({ images, currentPage, totalPages, onNext, onPrev }: PhotosPageProps) => {
   // New images from public/memories
   // New images from public/memories
   // Filtered out .DNG files as they are not supported by browsers
   const memoryImages = [
-    '/memories/05438073-d4bf-42fd-a591-5b79ae40c776.JPG',
-    '/memories/0dc9a2fa-036a-4d56-b7a4-b7bab7a5ec25.JPG',
+    resolvePath('/memories/05438073-d4bf-42fd-a591-5b79ae40c776.JPG'),
+    resolvePath('/memories/0dc9a2fa-036a-4d56-b7a4-b7bab7a5ec25.JPG'),
     // HEIC files removed due to browser incompatibility
-    '/memories/IMG_4891.JPG',
-    '/memories/IMG_4909.JPG',
-    '/memories/IMG_4913.JPG',
-    '/memories/IMG_5006.JPG',
-    '/memories/IMG_6280.JPG',
-    '/memories/IMG_7321.JPG',
-    '/memories/IMG_7411.jpg',
+    resolvePath('/memories/IMG_4891.JPG'),
+    resolvePath('/memories/IMG_4909.JPG'),
+    resolvePath('/memories/IMG_4913.JPG'),
+    resolvePath('/memories/IMG_5006.JPG'),
+    resolvePath('/memories/IMG_6280.JPG'),
+    resolvePath('/memories/IMG_7321.JPG'),
+    resolvePath('/memories/IMG_7411.jpg'),
     // DNG Files removed
-    '/memories/IMG_7975.JPG',
-    '/memories/IMG_7976.JPG',
-    '/memories/IMG_7977.JPG',
-    '/memories/IMG_8099.jpg',
-    '/memories/IMG_8100.jpg',
-    '/memories/IMG_8101.jpg',
-    '/memories/IMG_8102.jpg',
-    '/memories/IMG_8105.jpg',
-    '/memories/IMG_8106.jpg',
-    '/memories/a861063c-5a40-4df8-acaf-398ef7aa81a7.JPG',
-    '/memories/b8b07275-1668-431c-92da-d582c940a0c7.JPG',
-    '/memories/e0618077-191d-4805-b0b2-eeb0b1ca263e.JPG',
-    '/memories/e5a59266-912f-4ecf-8ac0-1b8abdcf200c.JPG',
-    '/memories/fc90b5e2-bc5b-4ae2-98f4-c14950b61788.JPG'
+    resolvePath('/memories/IMG_7975.JPG'),
+    resolvePath('/memories/IMG_7976.JPG'),
+    resolvePath('/memories/IMG_7977.JPG'),
+    resolvePath('/memories/IMG_8099.jpg'),
+    resolvePath('/memories/IMG_8100.jpg'),
+    resolvePath('/memories/IMG_8101.jpg'),
+    resolvePath('/memories/IMG_8102.jpg'),
+    resolvePath('/memories/IMG_8105.jpg'),
+    resolvePath('/memories/IMG_8106.jpg'),
+    resolvePath('/memories/a861063c-5a40-4df8-acaf-398ef7aa81a7.JPG'),
+    resolvePath('/memories/b8b07275-1668-431c-92da-d582c940a0c7.JPG'),
+    resolvePath('/memories/e0618077-191d-4805-b0b2-eeb0b1ca263e.JPG'),
+    resolvePath('/memories/e5a59266-912f-4ecf-8ac0-1b8abdcf200c.JPG'),
+    resolvePath('/memories/fc90b5e2-bc5b-4ae2-98f4-c14950b61788.JPG')
   ];
 
   // The specific 6 images ("die alten") for the film strips
   const filmImages = [
-    '/memories/IMG_8099.jpg',
-    '/memories/IMG_8100.jpg',
-    '/memories/IMG_8101.jpg',
-    '/memories/IMG_8102.jpg',
-    '/memories/IMG_8105.jpg',
-    '/memories/IMG_8106.jpg'
+    resolvePath('/memories/IMG_8099.jpg'),
+    resolvePath('/memories/IMG_8100.jpg'),
+    resolvePath('/memories/IMG_8101.jpg'),
+    resolvePath('/memories/IMG_8102.jpg'),
+    resolvePath('/memories/IMG_8105.jpg'),
+    resolvePath('/memories/IMG_8106.jpg')
   ];
 
   // Use distinct sets of images for the two strips
