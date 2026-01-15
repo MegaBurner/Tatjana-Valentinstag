@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import StartPage from './pages/StartPage';
 import PhotosPage from './pages/PhotosPage';
 import VinylPage from './pages/VinylPage';
 import LetterPage from './pages/LetterPage';
 import PeonyPage from './pages/PeonyPage';
+import CanvasBackgroundEffects from './components/Effects/CanvasBackgroundEffects';
 
 // Memory images from public/memories/
 const memoryImages: string[] = [
@@ -30,12 +31,26 @@ const pageVariants = {
   exit: { x: '-100%', opacity: 0 }
 };
 
+const songs = [
+  { src: '/song.mp3', cover: '/song.jpg' },
+  { src: '/Les.mp3', cover: '/les.jpeg' }
+];
+
 function App() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const nextPage = () => setCurrentPage(p => Math.min(p + 1, TOTAL_PAGES - 1));
   const prevPage = () => setCurrentPage(p => Math.max(p - 1, 0));
+
+  const nextSong = () => {
+    setCurrentSongIndex(prev => (prev + 1) % songs.length);
+  };
+
+  const prevSong = () => {
+    setCurrentSongIndex(prev => (prev - 1 + songs.length) % songs.length);
+  };
 
   const handleStart = () => {
     // Start music and go to next page
@@ -45,10 +60,41 @@ function App() {
     nextPage();
   };
 
+  // Auto-play when song changes
+  // Auto-play when song changes, but don't reset if already playing correctly
+  useEffect(() => {
+    if (audioRef.current && currentPage > 0) {
+      const newSrc = songs[currentSongIndex].src;
+      // Check using getAttribute to avoid absolute/relative path mismatches
+      const currentSrc = audioRef.current.getAttribute('src');
+      
+      if (currentSrc !== newSrc) {
+        audioRef.current.src = newSrc;
+        audioRef.current.play().catch(console.log);
+      } else if (audioRef.current.paused) {
+         // Optional: Only resume if we explicitly want to (e.g. initial start)
+         // But user said "immer weiter laufen", so if it's paused *and* we clearly just started/navigated, maybe we should play? 
+         // Actually, better to NOT force play if user paused it manually, EXCEPT on first start.
+         // Let's rely on the first start handler for the initial play.
+         // But when switching songs (currentSongIndex changes), we DO want to play.
+         // The dependency [currentSongIndex, currentPage] triggers this.
+         // If currentSongIndex changed, src changes -> plays.
+         // If currentPage changed, src is same -> do nothing (keep playing).
+      }
+    }
+  }, [currentSongIndex, currentPage]);
+
   return (
     <div className="overflow-hidden relative">
       {/* Persistent Audio Element */}
-      <audio ref={audioRef} src="/song.mp3" loop />
+      <audio 
+        ref={audioRef} 
+        src={songs[0].src} // Initial src, but useEffect controls it later
+        onEnded={nextSong}
+      />
+      
+      {/* Global Background Effects (Hearts/Stars) - High Performance Canvas */}
+      <CanvasBackgroundEffects />
 
       <AnimatePresence mode="wait">
         {currentPage === 0 && (
@@ -73,7 +119,7 @@ function App() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            style={{ position: 'absolute', width: '100%' }}
+            style={{ position: 'absolute', width: '100%', zIndex: 10, top: 0, left: 0 }}
           >
             <PhotosPage
               images={memoryImages}
@@ -101,6 +147,9 @@ function App() {
               onNext={nextPage}
               onPrev={prevPage}
               audioRef={audioRef}
+              currentSong={songs[currentSongIndex]}
+              onNextSong={nextSong}
+              onPrevSong={prevSong}
             />
           </motion.div>
         )}

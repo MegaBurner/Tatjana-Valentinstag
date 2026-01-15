@@ -67,7 +67,7 @@ const LetterPage = ({ currentPage, totalPages, onNext, onPrev }: LetterPageProps
       <PDFModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        pdfUrl="/letter.pdf"
+        pdfUrl="/notiz.pdf"
       />
 
       <PageNavigation

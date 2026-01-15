@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, RotateCcw, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, VolumeX, SkipBack, SkipForward } from 'lucide-react';
 import './VinylRecord.css';
 
 interface VinylRecordProps {
   audioRef: React.RefObject<HTMLAudioElement | null>;
+  coverImage?: string;
+  onNextSong?: () => void;
+  onPrevSong?: () => void;
 }
 
-const VinylRecord = ({ audioRef }: VinylRecordProps) => {
+const VinylRecord = ({ audioRef, coverImage, onNextSong, onPrevSong }: VinylRecordProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.7);
@@ -72,28 +75,53 @@ const VinylRecord = ({ audioRef }: VinylRecordProps) => {
   return (
     <div className="vinyl-wrapper">
       {/* Vinyl Disc */}
-      <motion.div 
-        animate={{ rotate: isPlaying ? 360 : 0 }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-        className="vinyl-record"
+      <div 
+        className={`vinyl-record ${isPlaying ? 'spinning' : ''}`}
       >
         <div className="vinyl-label">
-          <div className="vinyl-hole" />
+          {coverImage && (
+            <img 
+              src={coverImage} 
+              alt="Album Cover" 
+              className="vinyl-cover-img"
+              style={{ 
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover', 
+                borderRadius: '50%',
+                zIndex: 1
+              }}
+            />
+          )}
+          <div className="vinyl-hole" style={{ zIndex: 2, position: 'relative' }} />
         </div>
-      </motion.div>
+      </div>
 
       {/* Audio Controls */}
       <div className="audio-controls">
         <button onClick={handleRewind} className="control-btn" aria-label="Rewind">
           <RotateCcw size={20} />
         </button>
+        
+        {onPrevSong && (
+          <button onClick={onPrevSong} className="control-btn" aria-label="Previous Song">
+            <SkipBack size={20} />
+          </button>
+        )}
+
         <button onClick={togglePlay} className="control-btn play-btn" aria-label={isPlaying ? 'Pause' : 'Play'}>
           {isPlaying ? <Pause size={24} /> : <Play size={24} />}
         </button>
+
+        {onNextSong && (
+          <button onClick={onNextSong} className="control-btn" aria-label="Next Song">
+            <SkipForward size={20} />
+          </button>
+        )}
+
         <button onClick={toggleMute} className="control-btn" aria-label={isMuted ? 'Unmute' : 'Mute'}>
           {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
         </button>

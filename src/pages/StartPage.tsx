@@ -42,7 +42,7 @@ const StartPage = ({ onStart }: StartPageProps) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        A vinyl love letter for Tatjana
+        Für die schönste Seele der Welt für meinen Schatz
       </motion.p>
 
       <motion.button 

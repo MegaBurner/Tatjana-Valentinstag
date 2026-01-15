@@ -50,29 +50,37 @@ const PDFModal = ({ isOpen, onClose, pdfUrl }: PDFModalProps) => {
       >
         <motion.div 
           className="pdf-modal-content"
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close Button */}
-          <button className="pdf-modal-close" onClick={onClose} aria-label="Close">
-            <X size={24} />
-          </button>
-
-          {/* PDF Viewer */}
-          <iframe
-            src={pdfUrl}
+          {/* PDF Viewer - using object for fallback support */}
+          {/* Added params to hide sidebar but keep toolbar for zoom/pan */}
+          <object
+            data={`${pdfUrl}#navpanes=0`}
+            type="application/pdf"
             className="pdf-iframe"
             title="Brief für Tatjana"
-          />
+          >
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'white' }}>
+              <p>PDF konnte nicht direkt angezeigt werden.</p>
+              <p>Bitte nutze den Download-Button unten.</p>
+            </div>
+          </object>
 
-          {/* Download Button */}
-          <button className="pdf-modal-download" onClick={handleDownload}>
-            <Download size={18} />
-            PDF herunterladen
-          </button>
+          {/* Footer Controls */}
+          <div className="pdf-modal-footer">
+            <button className="pdf-modal-btn secondary" onClick={onClose}>
+              <X size={18} />
+              Schließen
+            </button>
+            <button className="pdf-modal-btn primary" onClick={handleDownload}>
+              <Download size={18} />
+              PDF herunterladen
+            </button>
+          </div>
         </motion.div>
       </motion.div>
     </AnimatePresence>,

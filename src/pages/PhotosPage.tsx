@@ -21,9 +21,7 @@ const PhotosPage = ({ images, currentPage, totalPages, onNext, onPrev }: PhotosP
   const memoryImages = [
     '/memories/05438073-d4bf-42fd-a591-5b79ae40c776.JPG',
     '/memories/0dc9a2fa-036a-4d56-b7a4-b7bab7a5ec25.JPG',
-    '/memories/IMG_0111.HEIC', // Note: HEIC might also not work in all browsers, but leaving for now if user didn't complain specifically
-    '/memories/IMG_2593.HEIC',
-    '/memories/IMG_2600.HEIC',
+    // HEIC files removed due to browser incompatibility
     '/memories/IMG_4891.JPG',
     '/memories/IMG_4909.JPG',
     '/memories/IMG_4913.JPG',
@@ -63,12 +61,11 @@ const PhotosPage = ({ images, currentPage, totalPages, onNext, onPrev }: PhotosP
   const strip2Images = filmImages.slice(3, 6);
 
   // Combine props images with new memories for variety
-  // And FILTER to remove DNGs (if any crept in) and remove film images
+  // And FILTER to remove DNGs (if any crept in)
   const allImages = [...images, ...memoryImages];
   
   // Polaroid should show "restliche bilder außer die im film"
-  // Filter out images that are in the film strip
-  // Also filter out DNGs just in case
+  // Filter out images that are in the film strip and DNGs
   const polaroidImages = Array.from(new Set(allImages)).filter(src => 
     !filmImages.includes(src) && !src.toLowerCase().endsWith('.dng')
   );
@@ -131,6 +128,30 @@ const PhotosPage = ({ images, currentPage, totalPages, onNext, onPrev }: PhotosP
             caption="PRADA"
             rotation={-2}
           />
+          
+          {/* Slideshow Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 1 }}
+            style={{
+              position: 'absolute',
+              bottom: '-40px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              color: '#4a4a4a',
+              fontSize: '0.8rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              opacity: 0.7
+            }}
+          >
+            <span style={{ fontSize: '1.2rem' }}>👆</span> 
+            <span style={{ fontStyle: 'italic', fontFamily: "'Playfair Display', serif" }}>
+              Diashow &mdash; Warten für mehr
+            </span>
+          </motion.div>
         </motion.div>
 
         {/* Right: Two Film Strips - Layered */}
