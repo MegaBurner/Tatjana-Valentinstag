@@ -1,0 +1,57 @@
+.polaroid-frame {
+  background: #fdfbf7; /* Off-white mostly */
+  padding: 15px 15px 60px 15px; /* Large bottom padding for caption */
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  width: 400px; /* Increased size for sharpness */
+  max-width: 90vw;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-image-container {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #eee;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05); /* Inner shadow for depth */
+}
+
+.polaroid-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Improve image rendering quality */
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Matching the bottom padding roughly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* PRADA Style Typography */
+  font-family: 'Playfair Display', serif; /* Or 'Bodoni Moda' if added */
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 1.4rem;
+  color: #000;
+  padding: 0 15px;
+  padding-bottom: 5px; /* Visual adjustment */
+}

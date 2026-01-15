@@ -1,0 +1,83 @@
+.photos-page-container {
+  overflow-x: hidden; /* Prevent horizontal scroll from rotated elements */
+  padding-top: 2rem !important; /* Override content-page padding */
+}
+
+.photo-title {
+  margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-rose-deep, #e07186); /* Fallback color */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.gallery-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 500px;
+}
+
+.decoration-left {
+  position: relative;
+  right: -80px; /* Stronger overlap behind polaroid */
+  z-index: 1; /* Behind polaroid */
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+  opacity: 0.9;
+}
+
+.main-polaroid-wrapper {
+  z-index: 10;
+  position: relative;
+}
+
+.decoration-right {
+  position: relative;
+  left: -60px; /* Stronger overlap ("weiter rein") */
+  z-index: 1; /* Behind polaroid */
+}
+
+.camera-svg {
+  width: 280px;
+  height: auto;
+  transform: rotate(-5deg);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .decoration-left {
+    display: none;
+  }
+  
+  .decoration-right {
+    position: absolute;
+    right: -100px;
+    opacity: 0.5;
+    transform: scale(0.8) rotate(10deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-layout {
+    flex-direction: column;
+    gap: 2rem;
+    min-height: auto;
+  }
+  
+  .decoration-left, 
+  .decoration-right {
+    display: none;
+  }
+  
+  .main-polaroid-wrapper {
+    margin: 2rem 0;
+  }
+  
+  .photo-title {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+}

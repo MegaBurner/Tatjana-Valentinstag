@@ -1,0 +1,24 @@
+.peony-page {
+  /* Kein Hintergrund - Body-Linien scheinen durch */
+}
+
+.flower-garden {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flower-item {
+  position: absolute;
+}
+
+.love-footer {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--accent-rose-deep);
+  text-align: center;
+  margin-top: 1rem;
+}

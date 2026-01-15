@@ -1,0 +1,54 @@
+.film-strip {
+  background: #1a1a1a;
+  padding: 15px 10px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 4;
+}
+
+/* Sprocket holes using repeating gradient */
+.film-holes-left,
+.film-holes-right {
+  width: 20px;
+  /* Simulating holes with a radial gradient pattern */
+  background-image: radial-gradient(circle, #e0e0e0 25%, transparent 30%);
+  background-size: 20px 30px; /* Width, Height of pattern */
+  background-position: center;
+  background-repeat: repeat-y;
+  background-color: #000;
+  opacity: 0.7;
+}
+
+.film-content {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column */
+  grid-template-rows: repeat(3, 1fr); /* 3 rows */
+  gap: 10px; /* Reduced gap */
+  width: 115px; /* ~20% smaller than 140px */
+  background: #111;
+  padding: 8px 10px;
+}
+
+.film-slot {
+  width: 100%;
+  aspect-ratio: 1; /* Square slots */
+  background: #000;
+  border: 1px solid #333;
+  overflow: hidden;
+  position: relative;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.film-slot:hover {
+  opacity: 1;
+}
+
+.film-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) contrast(1.1); /* Slight vintage look */
+}

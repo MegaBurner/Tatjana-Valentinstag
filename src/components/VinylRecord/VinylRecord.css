@@ -1,0 +1,179 @@
+.vinyl-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Vinyl Shadow/Glow */
+.vinyl-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  width: 280px;
+  height: 280px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  filter: blur(30px);
+  z-index: -1;
+}
+
+.vinyl-record {
+  width: min(280px, 85vw);
+  height: min(280px, 85vw);
+  border-radius: 50%;
+  position: relative;
+  
+  /* Tiefeneffekt mit Schatten */
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(0, 0, 0, 0.4);
+  
+  /* Grooves als Gradient */
+  background: 
+    radial-gradient(
+      circle at center,
+      #333 0%,
+      #1a1a1a 40%,
+      #000 100%
+    );
+    
+  /* Texture for grooves (repeating radial gradient) */
+  background-image: 
+    repeating-radial-gradient(
+      #171213 0, 
+      #171213 2px, 
+      #2a2a2a 3px, 
+      #2a2a2a 4px
+    );
+  
+  border: 1px solid rgba(50, 50, 50, 0.5);
+}
+
+/* Center Label */
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F4A5AE, #E07186);
+  border: 3px solid #171213;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Center Hole */
+.vinyl-hole {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Highlight reflection */
+.vinyl-record::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.06) 100%);
+  pointer-events: none;
+}
+
+/* Glassmorphism Audio Controls */
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 2.5rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.play-btn {
+  background: var(--accent-rose-deep);
+  color: white;
+  padding: 0.875rem;
+  box-shadow: 0 4px 15px rgba(224, 113, 134, 0.4);
+  transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+  background: var(--accent-rose);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(224, 113, 134, 0.5);
+}
+
+.volume-slider {
+  width: 70px;
+  height: 4px;
+  accent-color: var(--accent-rose-deep);
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .vinyl-record {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .vinyl-wrapper::before {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .vinyl-label {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .audio-controls {
+    padding: 0.75rem 1.25rem;
+    gap: 0.5rem;
+  }
+  
+  .volume-slider {
+    width: 50px;
+  }
+}

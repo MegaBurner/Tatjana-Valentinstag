@@ -1,0 +1,54 @@
+.peony {
+  display: block;
+  margin: 0 auto;
+  
+  /* GPU Acceleration */
+  will-change: transform;
+  transform-origin: center center;
+  
+  /* Soft Drop Shadow */
+  filter: drop-shadow(0 4px 12px rgba(212, 167, 200, 0.4));
+}
+
+/* Breathing Animation */
+.peony {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Layered Petal Animation */
+.outer-petals {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.middle-petals {
+  animation: breathe 3.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.inner-petals {
+  animation: breathe 3s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+/* Center and Stamens animate with inner petals */
+.peony-center {
+  animation: breathe 3s ease-in-out infinite;
+  animation-delay: 0.4s;
+  transform-origin: center center;
+}
+
+.stamens {
+  animation: breathe 3s ease-in-out infinite;
+  animation-delay: 0.4s;
+  transform-origin: center center;
+}
+

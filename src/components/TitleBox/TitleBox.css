@@ -1,0 +1,25 @@
+.title-box {
+  padding: 1rem 2rem;
+  border: 2px solid var(--accent-lavender);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px var(--shadow-soft);
+  margin: 0 auto;
+}
+
+.title-box h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--accent-rose-deep);
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 480px) {
+  .title-box h1 {
+    font-size: 1.75rem;
+  }
+}
