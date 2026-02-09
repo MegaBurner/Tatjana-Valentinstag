@@ -1,165 +1,120 @@
-.start-page {
+.valentine-page {
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  contain: layout style;
+}
+
+.valentine-content {
+  text-align: center;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1.5rem;
   padding: 2rem;
-  position: relative;
-  overflow: hidden;
 }
 
-/* Breathing Heart */
-.breathing-heart {
-  color: var(--accent-rose-deep);
-  animation: breathe 4s ease-in-out infinite;
-  opacity: 0.9;
+/* ===== Pulsing Heart ===== */
+.main-heart {
+  color: var(--accent-rose);
+  animation: heartbeat 1.3s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(255, 45, 85, 0.5))
+          drop-shadow(0 0 60px rgba(255, 45, 85, 0.25));
+  will-change: transform;
 }
 
-@keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; }
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(0.95); }
+  42% { transform: scale(1.12); }
+  60% { transform: scale(1); }
 }
 
-.start-title {
+/* ===== Title ===== */
+.valentine-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 10vw, 5rem);
-  font-weight: 500;
-  color: var(--accent-rose-deep);
-  text-align: center;
-  letter-spacing: -0.02em;
-  text-transform: lowercase;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+  text-shadow: 0 0 40px rgba(255, 45, 85, 0.25);
+  letter-spacing: -0.01em;
 }
 
-.start-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-top: -0.5rem;
+.title-highlight {
+  color: var(--accent-rose);
+  font-style: italic;
+  text-shadow:
+    0 0 20px rgba(255, 45, 85, 0.4),
+    0 0 60px rgba(255, 45, 85, 0.15);
 }
 
-.start-btn {
+/* ===== Buttons ===== */
+.valentine-buttons {
   display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2.5rem;
-  background: linear-gradient(135deg, var(--accent-rose), var(--accent-rose-deep));
+  min-height: 70px;
+}
+
+.btn-ja {
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, var(--accent-rose) 0%, var(--accent-rose-deep) 100%);
   color: white;
   border: none;
   border-radius: 999px;
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 30px rgba(224, 113, 134, 0.4);
-  transition: all 0.3s ease;
-  margin-top: 1rem;
+  box-shadow: 0 8px 32px rgba(255, 45, 85, 0.4);
+  transition: box-shadow 0.3s ease;
+  letter-spacing: 0.02em;
 }
 
-.start-btn:hover {
-  box-shadow: 0 12px 40px rgba(224, 113, 134, 0.5);
+.btn-ja:hover {
+  box-shadow:
+    0 12px 48px rgba(255, 45, 85, 0.55),
+    0 0 80px rgba(255, 45, 85, 0.2);
 }
 
-/* Floating Particles */
-.particles-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
+.btn-nein {
+  padding: 0.9rem 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
 }
 
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: float 10s ease-in-out infinite;
+.btn-nein:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-.particle-1 {
-  top: 10%;
-  left: 10%;
-  width: 20px;
-  height: 20px;
-  background: var(--accent-rose);
-  animation-duration: 12s;
-}
-
-.particle-2 {
-  top: 20%;
-  right: 20%;
-  width: 15px;
-  height: 15px;
-  background: var(--accent-lavender);
-  animation-duration: 15s;
-  animation-delay: 2s;
-}
-
-.particle-3 {
-  bottom: 30%;
-  left: 20%;
-  width: 25px;
-  height: 25px;
-  background: var(--accent-rose);
-  animation-duration: 18s;
-  animation-delay: 4s;
-  opacity: 0.2;
-}
-
-.particle-4 {
-  bottom: 15%;
-  right: 10%;
-  width: 12px;
-  height: 12px;
-  background: var(--accent-lavender);
-  animation-duration: 20s;
-  animation-delay: 1s;
-}
-
-/* Peony SVG Decoration */
-.peony-decoration {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 500px;
-  pointer-events: none;
-  opacity: 0.15;
-  mix-blend-mode: multiply;
-}
-
-.peony-svg {
-  width: 100%;
-  height: auto;
-  color: var(--accent-rose-deep);
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: dash 4s ease-out forwards;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
+.hint-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+  margin-top: -0.5rem;
 }
 
 @media (max-width: 480px) {
-  .start-title {
-    font-size: 2.5rem;
-  }
-  
-  .start-btn {
-    padding: 1rem 2rem;
-    font-size: 0.9rem;
-  }
+  .valentine-title { font-size: 2.2rem; }
+  .valentine-buttons { gap: 1rem; }
+  .btn-ja { padding: 1rem 2.2rem; font-size: 1.1rem; }
+  .btn-nein { padding: 0.75rem 1.5rem; font-size: 0.85rem; }
+  .main-heart svg { width: 60px; height: 60px; }
 }

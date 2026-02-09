@@ -1,35 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Hintergrund */
-  --bg-primary: #E6E0F8;
-  --bg-secondary: #F0EBF9;
-  
-  /* Akzente */
-  --accent-rose: #F4A5AE;
-  --accent-rose-deep: #E07186;
-  --accent-lavender: #C4B5E4;
-  
+  /* Dark Romantic Background */
+  --bg-primary: #0a0008;
+  --bg-secondary: #150010;
+
+  /* Valentine Accents */
+  --accent-rose: #ff2d55;
+  --accent-rose-deep: #e8174a;
+  --accent-pink: #ff6b8a;
+  --accent-pink-soft: #ffb3c6;
+
   /* Text */
-  --text-primary: #4A4A4A;
-  --text-secondary: #888888;
+  --text-primary: #ffffff;
+  --text-secondary: #ffcdd2;
   --text-light: #ffffff;
-  
-  /* Schatten */
-  --shadow-soft: rgba(155, 137, 196, 0.2);
-  --shadow-medium: rgba(0, 0, 0, 0.15);
-  
+
+  /* Shadows */
+  --shadow-soft: rgba(255, 45, 85, 0.15);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+
   /* Spacing */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 8rem;
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -37,21 +38,28 @@
   --radius-full: 50%;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: var(--bg-primary);
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--bg-primary) 0px,
-    var(--bg-primary) 40px,
-    var(--bg-secondary) 40px,
-    var(--bg-secondary) 80px
-  );
+  background: radial-gradient(ellipse at 50% 40%, #1a0a14 0%, #0d0008 50%, #060004 100%);
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   margin: 0;
   min-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent-rose);
+  color: white;
 }
